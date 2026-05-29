@@ -7,10 +7,12 @@ LABEL org.opencontainers.image.title="hardened-nginx-stream"
 LABEL org.opencontainers.image.description="Hardened Alpine-based nginx image with stream module"
 
 RUN set -eux; \
-    apk add --no-cache nginx nginx-mod-stream ca-certificates; \
+    apk add --no-cache nginx nginx-mod-stream ca-certificates libcap; \
     id nginx; \
     mkdir -p /etc/nginx/stream.d /var/cache/nginx /var/lib/nginx /tmp/nginx /run/nginx; \
-    chown -R nginx:nginx /var/cache/nginx /var/lib/nginx /tmp/nginx /run/nginx
+    chown -R nginx:nginx /var/cache/nginx /var/lib/nginx /tmp/nginx /run/nginx; \
+    setcap 'cap_net_bind_service=+ep' /usr/sbin/nginx; \
+    getcap /usr/sbin/nginx
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY stream.d/ /etc/nginx/stream.d/

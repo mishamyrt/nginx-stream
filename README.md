@@ -2,7 +2,7 @@
 
 Hardened Alpine-based Nginx image with the stream module enabled for TCP and UDP proxying.
 
-The image runs Nginx as the unprivileged `nginx` user, logs to stdout/stderr, and loads stream proxy configuration from `/etc/nginx/stream.d/*.conf`.
+The image runs Nginx as the unprivileged `nginx` user, allows binding privileged ports through `cap_net_bind_service`, logs to stdout/stderr, and loads stream proxy configuration from `/etc/nginx/stream.d/*.conf`.
 
 ## Usage
 
@@ -33,7 +33,7 @@ server {
 }
 ```
 
-The default image exposes ports `8080` and `8443`.
+The default image exposes ports `80` and `443`.
 
 ## Publishing
 
