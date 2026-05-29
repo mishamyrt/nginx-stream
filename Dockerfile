@@ -17,7 +17,7 @@ COPY stream.d/ /etc/nginx/stream.d/
 
 USER nginx:nginx
 
-EXPOSE 8080 8443
+EXPOSE 80 443
 
 STOPSIGNAL SIGQUIT
 
